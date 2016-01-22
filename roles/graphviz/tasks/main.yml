@@ -1,0 +1,5 @@
+- name: Install graphviz
+  homebrew:
+      name: graphviz
+      install_options: with-app
+      state: present

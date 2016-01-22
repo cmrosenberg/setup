@@ -1,0 +1,4 @@
+- name: Install emacs
+  homebrew:
+      pkg: emacs
+      install_options: with-cocoa

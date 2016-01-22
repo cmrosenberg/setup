@@ -1,0 +1,4 @@
+- name: Install git
+  homebrew:
+      pkg: git
+      state: present

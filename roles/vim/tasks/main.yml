@@ -1,0 +1,5 @@
+- name: Install vim
+  homebrew:
+    pkg: macvim
+    state: present
+    install_options: with-override-system-vim

@@ -1,0 +1,7 @@
+- name: Install tmux and reattach-to-user-namespace
+  homebrew:
+    pkg: "{{ item }}"
+    state: present
+  with_items:
+      - tmux
+      - reattach-to-user-namespace
