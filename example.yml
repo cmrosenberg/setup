@@ -1,0 +1,9 @@
+- name: "Install all the good stuff"
+  hosts: 127.0.0.1
+  connection: local
+  roles:
+        - personalized/git # Installs @cmrosenberg's preferred git setup
+        - personalized/zsh # Installs @cmrosenberg's preferred zsh setup
+        - personalized/vim # Installs @cmrosenberg's preferred vim setup
+        - personalized/tmux # Installs @cmrosenberg's preferred tmux setup
+        - composite/gnu-utils # installs GNU coreutils, binutils and findutils
