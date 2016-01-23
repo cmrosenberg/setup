@@ -1,0 +1,6 @@
+dependencies:
+    - simple/vim
+    - simple/cscope
+    - simple/tmux #Required for vim-tbone
+    - simple/git #Required for vim-fugitive
+    - simple/par #Preferred paragraph formatter for plain text

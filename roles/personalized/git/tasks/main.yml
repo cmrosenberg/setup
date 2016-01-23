@@ -1,0 +1,28 @@
+- name: Check if personal git configuration repository exists locally
+  stat:
+      path: "{{ git_repo_folder }}/config.gitscm"
+  register: st
+
+- name: Acquire personal git configuration
+  git:
+      repo: https://github.com/cmrosenberg/config.gitscm.git
+      dest: "{{ git_repo_folder }}/config.gitscm"
+  when: st.stat.isdir is not defined
+
+- name: Link global gitignore to ~/.gitignore
+  file:
+      state: link
+      src: "{{ git_repo_folder }}/config.gitscm/gitignore-global"
+      dest: ~/.gitignore
+
+- name: Link core configuration to ~/.gitconfig
+  file:
+      state: link
+      src: "{{ git_repo_folder }}/config.gitscm/gitconfig"
+      dest: ~/.gitconfig
+
+- name: Copy (OS-specific) local configuration to ~/.gitconfig.local
+  copy:
+      src: "{{ git_repo_folder }}/config.gitscm/osx"
+      dest: ~/.gitconfig.local
+  when: ansible_distribution == "MacOSX"

@@ -1,0 +1,3 @@
+dependencies:
+    - simple/vim #Default git editor is set to vim
+    - simple/git

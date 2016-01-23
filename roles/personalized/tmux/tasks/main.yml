@@ -1,0 +1,35 @@
+- name: Check if personal tmux configuration repository exists locally
+  stat:
+      path: "{{ git_repo_folder }}/config.tmux"
+  register: st
+
+- name: Acquire personal tmux configuration
+  git:
+      repo: https://github.com/cmrosenberg/config.tmux.git
+      dest: "{{ git_repo_folder }}/config.tmux"
+  when: st.stat.isdir is not defined
+
+- name: Link core configuration to ~/.tmux.conf
+  file:
+      state: link
+      src: "{{ git_repo_folder }}/config.tmux/core.conf"
+      dest: ~/.tmux.conf
+
+- name: Link OS-specific pre-configuration to ~/.tmux.conf.os-specific
+  file:
+      state: link
+      src: "{{ git_repo_folder }}/config.tmux/osx.conf"
+      dest: ~/.tmux.conf.os-specific
+  when: ansible_distribution == "MacOSX"
+
+
+- name: Link desired tmux color scheme to ~/.tmux.conf.colors
+  file:
+      state: link
+      src: "{{ git_repo_folder }}/config.tmux/colors/{{ tmux_colorscheme }}"
+      dest: ~/.tmux.conf.colors
+
+- name: Create ~/.tmux.conf.local for local modifications
+  file:
+      state: touch
+      path: ~/.tmux.conf.local

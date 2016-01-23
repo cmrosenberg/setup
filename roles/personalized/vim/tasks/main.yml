@@ -1,0 +1,35 @@
+- name: Check if personal vim configuration repository exists locally
+  stat:
+      path: "{{ git_repo_folder }}/config.vim"
+  register: st
+
+- name: Acquire personal vim configuration
+  git:
+      repo: https://github.com/cmrosenberg/config.vim.git
+      dest: "{{ git_repo_folder }}/config.vim"
+  when: st.stat.isdir is not defined
+
+- name: Symlink main configuration
+  file:
+      state: link
+      src: "{{ git_repo_folder }}/config.vim/vimrc.vim"
+      dest: ~/.vimrc
+
+- name: Ensure that the vim autoload directory exists
+  file:
+      path: ~/.vim/autoload/
+      state: directory
+
+- name: Install vim-plug
+  get_url:
+      url: https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+      dest: ~/.vim/autoload/plug.vim
+
+- name: Install all plugins
+  shell: "vim -u {{ git_repo_folder }}/config.vim/plugins.vim +PlugInstall +qall"
+
+- name: Symlink plugin configuration
+  file:
+      state: link
+      src: "{{ git_repo_folder }}/config.vim/plugins.vim"
+      dest: ~/.vimrc.plugins
