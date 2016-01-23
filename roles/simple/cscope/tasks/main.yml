@@ -1,0 +1,7 @@
+- name: Install cscope code broswing tool
+  homebrew:
+      name: cscope
+      state: present
+  when: ansible_distribution == "MacOSX"
+
+# TODO: Add tasks for other operating systems
