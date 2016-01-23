@@ -1,0 +1,7 @@
+- name: Install par paragraph formatter
+  homebrew:
+      name: par
+      state: present
+  when: ansible_distribution == "MacOSX"
+
+#TODO: Add tasks for other operating systems
