@@ -8,7 +8,7 @@
   homebrew:
       name: binutils
       state: present
-  when: ansible_distribution == "Ubuntu"
+  when: ansible_os_family == "Debian"
 
 - name: install binutils
   homebrew:

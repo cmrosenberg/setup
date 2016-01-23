@@ -11,12 +11,14 @@
       update_cache: yes
   when: ansible_distribution == "Ubuntu"
 
+#TODO: Add Debian-specific magic here
+
 - name: Install neovim
   become: yes
   apt:
       name: neovim
       state: present
-  when: ansible_distribution == "Ubuntu"
+  when: ansible_os_family == "Debian"
 
 - name: Install neovim
   become: yes

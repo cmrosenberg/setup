@@ -10,7 +10,7 @@
   apt:
       name: graphviz
       state: present
-  when: ansible_distribution == "Ubuntu"
+  when: ansible_os_family == "Debian"
 
 - name: Install graphviz
   become: yes
