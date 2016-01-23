@@ -9,7 +9,7 @@
   apt:
       name: tig
       state: present
-  when: ansible_distribution == "Ubuntu"
+  when: ansible_os_family == "Debian"
 
 - name: Install tig (git utility)
   become: yes
