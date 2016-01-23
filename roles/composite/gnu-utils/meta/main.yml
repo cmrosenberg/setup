@@ -1,0 +1,4 @@
+ dependencies:
+     - simple/binutils
+     - simple/coreutils
+     - simple/findutils
