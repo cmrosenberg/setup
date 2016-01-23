@@ -1,5 +1,13 @@
 - name: Install vim
   homebrew:
-    pkg: macvim
+    name: macvim
     state: present
     install_options: with-override-system-vim
+  when: ansible_distribution == "MacOSX"
+
+- name: Install vim
+  become: yes
+  apt:
+    name: vim
+    state: present
+  when: ansible_distribution == "Ubuntu"

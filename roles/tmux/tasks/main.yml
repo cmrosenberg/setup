@@ -5,3 +5,14 @@
   with_items:
       - tmux
       - reattach-to-user-namespace
+  when: ansible_distribution == "MacOSX"
+
+- name: Install tmux and xclip
+  become: yes
+  apt:
+    name: "{{ item }}"
+    state: present
+  with_items:
+      - tmux
+      - xclip
+  when: ansible_distribution == "Ubuntu"

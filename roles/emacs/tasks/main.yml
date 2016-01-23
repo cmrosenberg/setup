@@ -1,4 +1,12 @@
 - name: Install emacs
   homebrew:
-      pkg: emacs
+      name: emacs
       install_options: with-cocoa
+  when: ansible_distribution == "MacOSX"
+
+- name: Install emacs
+  become: yes
+  apt:
+      name: emacs
+      state: present
+  when: ansible_distribution == "Ubuntu"

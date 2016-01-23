@@ -1,4 +1,12 @@
 - name: Install zsh
   homebrew:
-      pkg: zsh
+      name: zsh
       state: present
+  when: ansible_distribution == "MacOSX"
+
+- name: Install zsh
+  become: yes
+  apt:
+      name: zsh
+      state: present
+  when: ansible_distribution == "Ubuntu"

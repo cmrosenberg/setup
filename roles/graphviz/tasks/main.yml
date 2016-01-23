@@ -3,3 +3,11 @@
       name: graphviz
       install_options: with-app
       state: present
+  when: ansible_distribution == "MacOSX"
+
+- name: Install graphviz
+  become: yes
+  apt:
+      name: graphviz
+      state: present
+  when: ansible_distribution == "Ubuntu"

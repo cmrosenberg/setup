@@ -1,4 +1,12 @@
 - name: Install git
   homebrew:
-      pkg: git
+      name: git
       state: present
+  when: ansible_distribution == "MacOSX"
+
+- name: Install git
+  become: yes
+  apt:
+      name: git
+      state: present
+  when: ansible_distribution == "Ubuntu"

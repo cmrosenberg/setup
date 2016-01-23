@@ -2,3 +2,11 @@
   homebrew:
       name: tree
       state: present
+  when: ansible_distribution == "MacOSX"
+
+- name: Install tree
+  become: yes
+  apt:
+      name: tree
+      state: present
+  when: ansible_distribution == "Ubuntu"
