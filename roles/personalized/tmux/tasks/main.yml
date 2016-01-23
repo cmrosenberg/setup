@@ -1,3 +1,8 @@
+- name: Ensure that the desired git repository folder exists
+  file:
+      state: directory
+      path: "{{ git_repo_folder }}"
+
 - name: Check if personal tmux configuration repository exists locally
   stat:
       path: "{{ git_repo_folder }}/config.tmux"
