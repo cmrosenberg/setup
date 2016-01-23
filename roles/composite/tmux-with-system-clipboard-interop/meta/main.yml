@@ -1,0 +1,4 @@
+dependencies:
+    - simple/tmux
+    - {role: simple/reattach-to-user-namespace, when: ansible_distribution == "MacOSX"}
+    - {role: simple/xclip, when: (ansible_distribution == "FreeBSD") or (ansible_os_family == "Debian")}
