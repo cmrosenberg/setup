@@ -16,3 +16,13 @@
       - tmux
       - xclip
   when: ansible_distribution == "Ubuntu"
+
+- name: Install tmux and xclip
+  become: yes
+  pkgng:
+    name: "{{ item }}"
+    state: present
+  with_items:
+      - tmux
+      - xclip
+  when: ansible_distribution == "FreeBSD"

@@ -11,3 +11,10 @@
       name: graphviz
       state: present
   when: ansible_distribution == "Ubuntu"
+
+- name: Install graphviz
+  become: yes
+  pkgng:
+      name: graphviz
+      state: present
+  when: ansible_distribution == "FreeBSD"

@@ -11,3 +11,10 @@
     name: vim
     state: present
   when: ansible_distribution == "Ubuntu"
+
+- name: Install vim
+  become: yes
+  pkgng:
+    name: vim-lite
+    state: present
+  when: ansible_distribution == "FreeBSD"

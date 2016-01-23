@@ -10,3 +10,10 @@
       name: tig
       state: present
   when: ansible_distribution == "Ubuntu"
+
+- name: Install tig (git utility)
+  become: yes
+  pkgng:
+      name: tig
+      state: present
+  when: ansible_distribution == "FreeBSD"

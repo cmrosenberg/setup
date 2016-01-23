@@ -10,3 +10,10 @@
       name: zsh
       state: present
   when: ansible_distribution == "Ubuntu"
+
+- name: Install zsh
+  become: yes
+  pkgng:
+      name: zsh
+      state: present
+  when: ansible_distribution == "FreeBSD"

@@ -17,3 +17,10 @@
       name: neovim
       state: present
   when: ansible_distribution == "Ubuntu"
+
+- name: Install neovim
+  become: yes
+  pkgng:
+      name: neovim
+      state: present
+  when: ansible_distribution == "FreeBSD"

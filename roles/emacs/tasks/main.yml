@@ -10,3 +10,10 @@
       name: emacs
       state: present
   when: ansible_distribution == "Ubuntu"
+
+- name: Install emacs
+  become: yes
+  pkgng:
+      name: "{{ bsd_emacs_package }}"
+      state: present
+  when: ansible_distribution == "FreeBSD"

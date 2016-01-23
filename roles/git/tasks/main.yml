@@ -10,3 +10,10 @@
       name: git
       state: present
   when: ansible_distribution == "Ubuntu"
+
+- name: Install git
+  become: yes
+  pkgng:
+      name: git
+      state: present
+  when: ansible_distribution == "FreeBSD"

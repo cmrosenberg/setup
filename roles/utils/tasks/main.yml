@@ -9,6 +9,7 @@
   when: ansible_distribution == "MacOSX"
 
 - name: Install binutils, coreutils and findutils
+  become: yes
   apt:
       name: "{{ item }}"
       state: present
@@ -17,3 +18,14 @@
       - coreutils
       - findutils
   when: ansible_distribution == "Ubuntu"
+
+- name: Install binutils, coreutils and findutils
+  become: yes
+  pkgng:
+      name: "{{ item }}"
+      state: present
+  with_items:
+      - binutils
+      - coreutils
+      - findutils
+  when: ansible_distribution == "FreeBSD"

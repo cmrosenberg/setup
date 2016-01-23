@@ -10,3 +10,10 @@
       name: tree
       state: present
   when: ansible_distribution == "Ubuntu"
+
+- name: Install tree
+  become: yes
+  pkgng:
+      name: tree
+      state: present
+  when: ansible_distribution == "FreeBSD"
