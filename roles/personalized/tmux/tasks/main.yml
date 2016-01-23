@@ -36,5 +36,5 @@
 
 - name: Create ~/.tmux.conf.local for local modifications
   file:
-      state: file
+      state: touch
       path: ~/.tmux.conf.local
