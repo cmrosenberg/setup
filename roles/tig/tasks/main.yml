@@ -1,0 +1,12 @@
+- name: Install tig (git utility)
+  homebrew:
+      name: tig
+      state: present
+  when: ansible_distribution == "MacOSX"
+
+- name: Install tig (git utility)
+  become: yes
+  apt:
+      name: tig
+      state: present
+  when: ansible_distribution == "Ubuntu"
