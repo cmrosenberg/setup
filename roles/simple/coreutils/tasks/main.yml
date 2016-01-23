@@ -1,0 +1,17 @@
+- name: install coreutils
+  homebrew:
+      name: coreutils
+      state: present
+  when: ansible_distribution == "macosx"
+
+- name: install coreutils
+  homebrew:
+      name: coreutils
+      state: present
+  when: ansible_distribution == "Ubuntu"
+
+- name: install coreutils
+  homebrew:
+      name: coreutils
+      state: present
+  when: ansible_distribution == "FreeBSD"

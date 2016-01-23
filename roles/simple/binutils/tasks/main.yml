@@ -1,0 +1,17 @@
+- name: install binutils
+  homebrew:
+      name: binutils
+      state: present
+  when: ansible_distribution == "macosx"
+
+- name: install binutils
+  homebrew:
+      name: binutils
+      state: present
+  when: ansible_distribution == "Ubuntu"
+
+- name: install binutils
+  homebrew:
+      name: binutils
+      state: present
+  when: ansible_distribution == "FreeBSD"

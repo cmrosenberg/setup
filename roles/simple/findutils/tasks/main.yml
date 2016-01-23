@@ -1,0 +1,17 @@
+- name: install findutils
+  homebrew:
+      name: findutils
+      state: present
+  when: ansible_distribution == "macosx"
+
+- name: install findutils
+  homebrew:
+      name: findutils
+      state: present
+  when: ansible_distribution == "Ubuntu"
+
+- name: install findutils
+  homebrew:
+      name: findutils
+      state: present
+  when: ansible_distribution == "FreeBSD"
