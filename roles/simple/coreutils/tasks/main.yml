@@ -5,13 +5,15 @@
   when: ansible_distribution == "macosx"
 
 - name: install coreutils
-  homebrew:
+  become: yes
+  apt:
       name: coreutils
       state: present
   when: ansible_os_family == "Debian"
 
 - name: install coreutils
-  homebrew:
+  become: yes
+  pkgng:
       name: coreutils
       state: present
   when: ansible_distribution == "FreeBSD"

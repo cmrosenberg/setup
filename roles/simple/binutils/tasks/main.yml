@@ -2,16 +2,18 @@
   homebrew:
       name: binutils
       state: present
-  when: ansible_distribution == "macosx"
+  when: ansible_distribution == "MacOSX"
 
 - name: install binutils
-  homebrew:
+  become: yes
+  apt:
       name: binutils
       state: present
   when: ansible_os_family == "Debian"
 
 - name: install binutils
-  homebrew:
+  become: yes
+  pkgng:
       name: binutils
       state: present
   when: ansible_distribution == "FreeBSD"
