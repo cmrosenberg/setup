@@ -1,28 +1,19 @@
-- name: Install tmux and reattach-to-user-namespace
+- name: Install tmux
   homebrew:
-    pkg: "{{ item }}"
+    name: tmux
     state: present
-  with_items:
-      - tmux
-      - reattach-to-user-namespace
   when: ansible_distribution == "MacOSX"
 
-- name: Install tmux and xclip
+- name: Install tmux
   become: yes
   apt:
-    name: "{{ item }}"
+    name: tmux
     state: present
-  with_items:
-      - tmux
-      - xclip
-  when: ansible_distribution == "Ubuntu"
+  when: ansible_os_family == "Debian"
 
-- name: Install tmux and xclip
+- name: Install tmux
   become: yes
   pkgng:
-    name: "{{ item }}"
+    name: tmux
     state: present
-  with_items:
-      - tmux
-      - xclip
   when: ansible_distribution == "FreeBSD"

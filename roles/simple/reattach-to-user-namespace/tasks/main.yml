@@ -1,0 +1,5 @@
+- name: Install reattach-to-user-namespace
+  homebrew:
+      name: reattach-to-user-namespace
+      state: present
+  when: ansible_distribution == "MacOSX"

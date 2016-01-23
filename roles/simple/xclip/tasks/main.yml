@@ -1,0 +1,13 @@
+- name: Install xclip
+  become: yes
+  apt:
+      name: xclip
+      state: present
+  when: ansible_os_family == "Debian"
+
+- name: Install xclip
+  become: yes
+  pkgng:
+      name: xclip
+      state: present
+  when: ansible_distribution == "FreeBSD"
