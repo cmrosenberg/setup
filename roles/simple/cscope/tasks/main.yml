@@ -4,4 +4,16 @@
       state: present
   when: ansible_distribution == "MacOSX"
 
-# TODO: Add tasks for other operating systems
+- name: Install cscope code broswing tool
+  become: yes
+  apt:
+    name: cscope
+    state: present
+  when: ansible_os_family == "Debian"
+
+- name: Install cscope code broswing tool
+  become: yes
+  pkgng:
+    name: cscope
+    state: present
+  when: ansible_distribution == "FreeBSD"

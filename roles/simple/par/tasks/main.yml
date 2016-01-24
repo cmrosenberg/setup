@@ -4,4 +4,16 @@
       state: present
   when: ansible_distribution == "MacOSX"
 
-#TODO: Add tasks for other operating systems
+- name: Install par paragraph formatter
+  become: yes
+  apt:
+    name: par
+    state: present
+  when: ansible_os_family == "Debian"
+
+- name: Install par paragraph formatter
+  become: yes
+  pkgng:
+    name: par
+    state: present
+  when: ansible_distribution == "FreeBSD"
