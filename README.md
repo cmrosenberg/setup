@@ -24,14 +24,13 @@ downloads my personal configuration and installs it appropriately.
 
 ## How do I use it?
 
-* Install [Ansible](http://www.ansible.com/) on your system
-(bootstrapping script forthcoming!)
-
+* Run `bootstrap-ansible.sh` to install Ansible on your system.
 * Create an Ansible playbook that includes the roles you want. See
 `example.yml`
 
-* Run `ansible-playbook filename-of-playbook.yml -i hosts` to run the
-scripts.
+* Run `ansible-playbook filename-of-playbook.yml -i default-host` to run
+a playbook. If you are on FreeBSD, you have to use `ansible-playbook
+filename-of-playbook.yml -i freebsd-host`.
 
 ## Supported operating systems
 
