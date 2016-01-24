@@ -27,6 +27,13 @@
       dest: ~/.tmux.conf.os-specific
   when: ansible_distribution == "MacOSX"
 
+- name: Link OS-specific pre-configuration to ~/.tmux.conf.os-specific
+  file:
+      state: link
+      src: "{{ git_repo_folder }}/config.tmux/linux-bsd.conf"
+      dest: ~/.tmux.conf.os-specific
+  when: (ansible_os_family == "Debian") or (ansible_distribution == "FreeBSD")
+
 
 - name: Link desired tmux color scheme to ~/.tmux.conf.colors
   file:
