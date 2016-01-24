@@ -32,6 +32,24 @@ downloads my personal configuration and installs it appropriately.
 a playbook. If you are on FreeBSD, you have to use `ansible-playbook
 filename-of-playbook.yml -i freebsd-host`.
 
+## Using Vagrant to test the scripts
+
+The `Vagrantfile` contains test configurations for Ubuntu, Debian and
+FreeBSD.
+
+To spin up a virtual machine of interest, type `vagrant up
+<distroname>`, where `<distroname>` is either `ubuntu`, `freebsd` or
+`debian`.
+
+Use `vagrant ssh <distroname>` to log into the machine. You'll find
+the repository in `/vagrant/`. From here you can run the ansible
+scripts as if you had just acquired a fresh box.
+
+(I am aware that you can use Ansible as a [vagrant
+provisioner](https://www.vagrantup.com/docs/provisioning/ansible.html).
+However, the point of this repository is to simualte that you are
+setting up a local machine, including explicitly installing Ansible.)
+
 ## Supported operating systems
 
 Mac OS X is my daily driver and the only truly first-class citizen in
