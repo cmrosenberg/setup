@@ -28,9 +28,11 @@ downloads my personal configuration and installs it appropriately.
 * Create an Ansible playbook that includes the roles you want. See
 `example.yml`
 
-* Run `ansible-playbook filename-of-playbook.yml -i default-host` to run
+* Run `ansible-playbook filename-of-playbook.yml -i default-host --ask-become-pass` to run
 a playbook. If you are on FreeBSD, you have to use `ansible-playbook
-filename-of-playbook.yml -i freebsd-host`.
+filename-of-playbook.yml -i freebsd-host --ask-become-pass`. If you run
+inside a Vagrant machine or have passwordless sudo in other ways, you can
+drop the `--ask-become-pass`option.
 
 ## Using Vagrant to test the scripts
 
