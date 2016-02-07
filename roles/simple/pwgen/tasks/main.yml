@@ -1,0 +1,19 @@
+- name: Install pwgen
+  homebrew:
+    name: pwgen
+    state: present
+  when: ansible_distribution == "MacOSX"
+
+- name: Install pwgen
+  become: yes
+  apt:
+    name: pwgen
+    state: present
+  when: ansible_os_family == "Debian"
+
+- name: Install pwgen
+  become: yes
+  pkgng:
+    name: pwgen
+    state: present
+  when: ansible_distribution == "FreeBSD"
