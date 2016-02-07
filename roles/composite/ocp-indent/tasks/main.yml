@@ -1,0 +1,2 @@
+- name: Install OCP Indent for Ocaml
+  command: opam install ocp-indent
