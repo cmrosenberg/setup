@@ -2,7 +2,7 @@
   homebrew:
       name: coreutils
       state: present
-  when: ansible_distribution == "macosx"
+  when: ansible_distribution == "MacOSX"
 
 - name: install coreutils
   become: yes
