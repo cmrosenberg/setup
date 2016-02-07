@@ -1,0 +1,23 @@
+- name: Install async
+  command: opam install async
+
+- name: Install yojson
+  command: opam install yojson
+
+- name: Install core_extended
+  command: opam install core_extended
+
+- name: Install core_bench
+  command: opam install core_bench
+
+- name: Install cohttp
+  command: opam install cohttp
+
+# - name: Install async_graphics
+#   command: opam install async_graphics
+
+- name: Install cryptokit
+  command: opam install cryptokit
+
+- name: Install menhir
+  command: opam install menhir
