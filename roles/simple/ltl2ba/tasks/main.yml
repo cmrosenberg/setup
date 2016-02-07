@@ -1,0 +1,11 @@
+- name: Install ltl2ba Rutime Verification tool (MacOSX)
+  homebrew:
+      name: ltl2ba
+      state: present
+  when: ansible_distribution == "MacOSX"
+
+- name: Install ltl2ba Rutime Verification tool (FreeBSD)
+  pkgng:
+      name: ltl2ba
+      state: present
+  when: ansible_distribution == "FreeBSD"
