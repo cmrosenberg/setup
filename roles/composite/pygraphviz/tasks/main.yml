@@ -1,0 +1,10 @@
+- name: Install pygraphviz
+  pip:
+      name: pygraphviz
+  when: ansible_distribution == "MacOSX"
+
+- name: Install pygraphviz
+  become: yes
+  pkgng:
+      name: py27-graphviz
+  when: ansible_distribution == "FreeBSD"
