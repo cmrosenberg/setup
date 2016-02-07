@@ -1,0 +1,11 @@
+- name: Figure out exact path to to ocp-indent
+  shell: echo 'autocmd FileType ocaml source '"$(opam config var prefix)"'/share/ocp-indent/vim/indent/ocaml.vim'
+  register: info
+  changed_when: no
+  failed_when: no
+
+- name: Ensure that exact path directive is in ~/.vimrc.local
+  lineinfile:
+      dest: ~/.vimrc.local
+      line: "{{ info.stdout }}"
+      state: present

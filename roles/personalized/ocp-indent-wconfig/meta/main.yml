@@ -1,0 +1,3 @@
+dependencies:
+    - personalized/vim
+    - composite/ocp-indent
