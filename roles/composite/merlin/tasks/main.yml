@@ -1,0 +1,2 @@
+- name: Install merlin (IDE-like features for OCaml)
+  command: opam install merlin
