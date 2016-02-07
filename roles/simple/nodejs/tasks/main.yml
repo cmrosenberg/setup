@@ -1,0 +1,47 @@
+- name: Install NodeJS
+  homebrew:
+      name: nodejs
+      state: present
+  when: ansible_distribution == "MacOSX"
+
+- name: Install System utilities from Debian repositories
+  become: yes
+  apt: pkg={{ item }} update_cache=yes cache_valid_time=3600
+  with_items:
+      - apt-transport-https
+      - curl
+  when: ansible_distribution == "Debian"
+
+- name: Add Apt signing key for Nodesource repository
+  become: yes
+  apt_key:
+      url: https://deb.nodesource.com/gpgkey/nodesource.gpg.key
+      state: present
+  when: ansible_distribution == "Debian"
+
+- name: Get Debian distribution codename
+  shell: lsb_release -cs
+  register: lsb_output
+  when: ansible_distribution == "Debian"
+
+- name: Add Nodesource deb repository
+  become: yes
+  apt_repository:
+      repo: "deb https://deb.nodesource.com/node_5.x {{ lsb_output.stdout_lines[0] }} main"
+      state: present
+      update_cache: yes
+  when: ansible_distribution == "Debian"
+
+- name: Add Nodesource src repository
+  become: yes
+  apt_repository:
+      repo: "deb-src https://deb.nodesource.com/node_5.x {{ lsb_output.stdout_lines[0] }} main"
+      state: present
+      update_cache: yes
+  when: ansible_distribution == "Debian"
+
+- name: Install Node.js
+  become: yes
+  apt:
+      name: nodejs
+  when: ansible_os_family == "Debian"
