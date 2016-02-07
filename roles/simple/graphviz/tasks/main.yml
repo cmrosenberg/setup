@@ -1,7 +1,7 @@
 - name: Install graphviz
   homebrew:
       name: graphviz
-      install_options: with-app
+      install_options: with-app, with-bindings
       state: present
   when: ansible_distribution == "MacOSX"
 
