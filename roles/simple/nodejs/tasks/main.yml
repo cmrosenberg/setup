@@ -1,47 +1,59 @@
-- name: Install NodeJS
+- name: Install NodeJS and NPM (MacOSX)
   homebrew:
       name: nodejs
       state: present
   when: ansible_distribution == "MacOSX"
 
-- name: Install System utilities from Debian repositories
+- name: Install System utilities from Debian repositories (Debian-like)
   become: yes
   apt: pkg={{ item }} update_cache=yes cache_valid_time=3600
   with_items:
       - apt-transport-https
       - curl
-  when: ansible_distribution == "Debian"
+  when: ansible_os_family == "Debian"
 
-- name: Add Apt signing key for Nodesource repository
+- name: Add Apt signing key for Nodesource repository (Debian-like)
   become: yes
   apt_key:
       url: https://deb.nodesource.com/gpgkey/nodesource.gpg.key
       state: present
-  when: ansible_distribution == "Debian"
+  when: ansible_os_family == "Debian"
 
-- name: Get Debian distribution codename
+- name: Get Debian distribution codename (Debian-like)
   shell: lsb_release -cs
   register: lsb_output
-  when: ansible_distribution == "Debian"
+  when: ansible_os_family == "Debian"
+  changed_when: False
 
-- name: Add Nodesource deb repository
+- name: Add Nodesource deb repository (Debian-like)
   become: yes
   apt_repository:
       repo: "deb https://deb.nodesource.com/node_5.x {{ lsb_output.stdout_lines[0] }} main"
       state: present
       update_cache: yes
-  when: ansible_distribution == "Debian"
+  when: ansible_os_family == "Debian"
 
-- name: Add Nodesource src repository
+- name: Add Nodesource src repository (Debian-like)
   become: yes
   apt_repository:
       repo: "deb-src https://deb.nodesource.com/node_5.x {{ lsb_output.stdout_lines[0] }} main"
       state: present
       update_cache: yes
-  when: ansible_distribution == "Debian"
+  when: ansible_os_family == "Debian"
 
-- name: Install Node.js
+- name: Install Node.js and NPM (Debian-like)
   become: yes
   apt:
       name: nodejs
+      state: present
   when: ansible_os_family == "Debian"
+
+- name: Install Node.js and NPM (FreeBSD)
+  become: yes
+  pkgng:
+      name: "{{ item }}"
+      state: present
+  with_items:
+      - node
+      - www/npm
+  when: ansible_distribution == "FreeBSD"
