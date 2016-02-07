@@ -67,4 +67,4 @@ system, please send me a pull request!
 
 ## I am intrigued. Are there other repositories like these?
 
-Sure! Check out [osxc](https://github.com/osxc/).
+Sure! Check out [osxc](https://osxc.github.io/).
