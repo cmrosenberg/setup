@@ -1,0 +1,26 @@
+- name: Download openfst
+  get_url:
+      url: "{{ openfst_url }}"
+      dest: "{{ openfst_download_dest }}"
+  register: openfst
+
+- name: Unpack openfst
+  unarchive:
+      copy: no
+      src: "{{ openfst.dest }}"
+      dest: "{{ openfst_download_dest }}"
+
+- name: Configure openfst
+  shell: ./configure
+  args:
+      chdir: "{{ openfst_download_dest }}/{{ openfst_version }}"
+
+- name: make openfst
+  shell: make
+  args:
+      chdir: "{{ openfst_download_dest }}/{{ openfst_version }}"
+
+- name: make install openfst
+  shell: make install
+  args:
+      chdir: "{{ openfst_download_dest }}/{{ openfst_version }}"
