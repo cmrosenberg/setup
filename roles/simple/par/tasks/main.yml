@@ -14,6 +14,6 @@
 - name: Install par paragraph formatter
   become: yes
   pkgng:
-    name: par
+    name: par_format
     state: present
   when: ansible_distribution == "FreeBSD"
