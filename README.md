@@ -52,6 +52,11 @@ provisioner](https://www.vagrantup.com/docs/provisioning/ansible.html).
 However, the point of this repository is to simualte that you are
 setting up a local machine, including explicitly installing Ansible.)
 
+### What about testing on OS X?
+
+Ideally, I'd like to have a Vagrant box for OS X also. I am intrigued
+by [these instructions for generating Virtualbox images for OS X](https://github.com/geerlingguy/mac-osx-virtualbox-vm), and might try it someday.
+
 ## Supported operating systems
 
 Mac OS X is my daily driver and the only truly first-class citizen in
@@ -59,3 +64,7 @@ this setup. Nevertheless, my goal is to have a fully-scripted setup
 compatible with all major unices, particularly Ubuntu, FreeBSD and
 Debian. If you come across a role that is incorrectly coded for your
 system, please send me a pull request!
+
+## I am intrigued. Are there other repositories like these?
+
+Sure! Check out [osxc](https://github.com/osxc/).
