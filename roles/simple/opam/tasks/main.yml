@@ -1,0 +1,30 @@
+- name: Install OPAM
+  homebrew:
+    name: opam
+    state: present
+  when: ansible_distribution == "MacOSX"
+
+- name: Install OPAM
+  become: yes
+  apt:
+    name: opam
+    state: present
+  when: ansible_os_family == "Debian"
+
+- name: Install OPAM
+  become: yes
+  pkgng:
+    name: opam
+    state: present
+  when: ansible_distribution == "FreeBSD"
+
+- name: Initialize OPAM
+  shell: opam init -y
+  args:
+      creates: ~/.opam
+
+- name: Install Core
+  command: opam install core
+
+- name: Install utop
+  command: opam install utop
