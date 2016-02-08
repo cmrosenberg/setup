@@ -1,0 +1,106 @@
+# For information about LaTeX TeX Directory Structure, consult https://en.wikibooks.org/wiki/LaTeX/Installing_Extra_Packages#Manual_installation
+# For information about how LaTeX is used at the Faculty of Informatics at UiO (IFI), consult https://www.mn.uio.no/ifi/tjenester/it/hjelp/latex/
+
+- name: Detect TeX Directory Structure location
+  shell: kpsewhich -var-value=TEXMFHOME
+  register: tex_loc
+  changed_when: False
+
+- name: Stat package directories
+  stat:
+      path: "{{ tex_loc.stdout_lines[0] }}/tex/latex/{{ item }}"
+  register: stat_result
+  with_items:
+      - ifimasterforside
+      - ifikompendiumforside
+      - ifiresreportforside
+
+- name: Determine if packages are installed
+  set_fact:
+      ifimaster_installed: stat_result.results[0].stat.isdir
+      ifikompdeniumforside_installed: stat_result.results[1].stat.isdir
+      ifiresreportforside_installed: stat_result.results[2].stat.isdir
+      all_installed: ifimaster_installed and ifikompdeniumforside_installed and ifiresreportforside_installed
+
+- name: Ensure the enclosing TeX directory structure exists
+  file:
+      state: directory
+      recurse: yes
+      path: "{{ tex_loc.stdout_lines[0] }}/tex/latex/ifikompendium"
+  when: not all_installed
+
+- name: Download ifikompendium.zip
+  get_url:
+      url: "{{ ifikompendium_url }}"
+      checksum: "{{ ifikompendium_checksum }}"
+      dest: "{{ tex_loc.stdout_lines[0] }}/tex/latex/"
+  register: ifikompdenium_downloaded
+  when: not all_installed
+
+- name: Unarchive ifikompendium
+  unarchive:
+      src: "{{ tex_loc.stdout_lines[0] }}/tex/latex/{{ ifikompendium_archive }}"
+      dest: "{{ tex_loc.stdout_lines[0] }}/tex/latex/ifikompendium/"
+  when: not all_installed
+
+- name: Create ifimasterforside directory
+  file:
+      state: directory
+      path: "{{ tex_loc.stdout_lines[0] }}/tex/latex/ifimasterforside"
+  when: not ifimaster_installed
+
+- name: Create ifikompendiumforside directory
+  file:
+      state: directory
+      path: "{{ tex_loc.stdout_lines[0] }}/tex/latex/ifikompendiumforside"
+  when: not ifikompdeniumforside_installed
+
+- name: Create ifiresreportforside directory
+  file:
+      state: directory
+      path: "{{ tex_loc.stdout_lines[0] }}/tex/latex/ifiresreportforside"
+  when: not ifiresreportforside_installed
+
+- name: Move all ifimaster-files to ifimasterforside directory
+  shell: mv "{{ tex_loc.stdout_lines[0] }}"/tex/latex/ifikompendium/ifimasterforside* "{{ tex_loc.stdout_lines[0] }}"/tex/latex/ifimasterforside/
+  when: not ifimaster_installed
+
+- name: Move all ifikompendiumforside-files to ifikompendiumforside directory
+  shell: "mv {{ tex_loc.stdout_lines[0] }}/tex/latex/ifikompendium/{{ item }}* {{ tex_loc.stdout_lines[0] }}/tex/latex/ifikompendiumforside/"
+  with_items:
+      - ifi-kompendium-forside
+      - ifikompendium
+      - uio-kompendium-forside
+  when: not ifikompdeniumforside_installed
+
+- name: Move all ifiresreportforside-files to ifiresreportforside directory
+  shell: "mv {{ tex_loc.stdout_lines[0] }}/tex/latex/ifikompendium/{{ item }}* {{ tex_loc.stdout_lines[0] }}/tex/latex/ifiresreportforside/"
+  with_items:
+      - ifi-resreport-forside
+      - ifiresreportforside
+  when: not ifiresreportforside_installed
+
+- name: Ensure that base directory exists for ifimaster class file
+  file:
+      state: directory
+      path: "{{ tex_loc.stdout_lines[0] }}/tex/latex/base"
+  when: not ifimaster_installed
+
+- name: Download ifimaster base class file
+  get_url:
+      url: "{{ ifimaster_class_url }}"
+      checksum: "{{ ifimaster_class_checksum }}"
+      dest: "{{ tex_loc.stdout_lines[0] }}/tex/latex/base/"
+  when: not ifimaster_installed
+
+- name: Remove temporary ifikompendium directory
+  file:
+      path: "{{ tex_loc.stdout_lines[0] }}/tex/latex/ifikompendium/"
+      state: absent
+  when: ifikompdenium_downloaded.changed
+
+- name: Remove ifikompendium archive file
+  file:
+      path: "{{ tex_loc.stdout_lines[0] }}/tex/latex/{{ ifikompendium_archive }}"
+      state: absent
+  when: ifikompdenium_downloaded.changed

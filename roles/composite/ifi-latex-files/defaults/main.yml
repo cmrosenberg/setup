@@ -1,0 +1,5 @@
+ifikompendium_archive: ifikompendium.zip
+ifikompendium_checksum: "sha1:baefa318452985d039d1141e1e934a3215416018"
+ifikompendium_url: "http://dag.at.ifi.uio.no/public/download/{{ ifikompendium_archive }}"
+ifimaster_class_checksum: "sha1:881cd1ad3c8d2dac37a24b7f1f16042138f129c3"
+ifimaster_class_url: http://dag.at.ifi.uio.no/public/download/ifimaster.cls
