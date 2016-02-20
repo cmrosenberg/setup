@@ -1,0 +1,5 @@
+- name: Install leiningen (clojure build tool)
+  homebrew:
+      name: leiningen
+      state: present
+  when: ansible_distribution == "MacOSX"
