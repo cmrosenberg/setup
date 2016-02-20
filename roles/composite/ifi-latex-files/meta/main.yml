@@ -1,2 +1,3 @@
 dependencies:
     - {role: simple/mactex, when: ansible_distribution == "MacOSX"}
+    - {role: simple/texlive, when: ansible_distribution == "FreeBSD"}

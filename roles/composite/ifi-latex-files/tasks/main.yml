@@ -14,13 +14,18 @@
       - ifimasterforside
       - ifikompendiumforside
       - ifiresreportforside
+  changed_when: False
+
 
 - name: Determine if packages are installed
   set_fact:
-      ifimaster_installed: stat_result.results[0].stat.isdir
-      ifikompdeniumforside_installed: stat_result.results[1].stat.isdir
-      ifiresreportforside_installed: stat_result.results[2].stat.isdir
-      all_installed: ifimaster_installed and ifikompdeniumforside_installed and ifiresreportforside_installed
+      ifimaster_installed: "{{ stat_result.results[0].stat.exists }}"
+      ifikompdeniumforside_installed: "{{ stat_result.results[1].stat.exists }}"
+      ifiresreportforside_installed: "{{ stat_result.results[2].stat.exists }}"
+
+- name: Create helper fact
+  set_fact:
+      all_installed: "{{ ifimaster_installed and ifikompdeniumforside_installed and ifiresreportforside_installed }}"
 
 - name: Ensure the enclosing TeX directory structure exists
   file:
