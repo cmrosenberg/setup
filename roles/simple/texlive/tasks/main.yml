@@ -1,0 +1,10 @@
+- name: Install TexLive on FreeBSD
+  become: yes
+  pkgng:
+      name: "{{ item }}"
+      state: present
+  with_items:
+      - texlive-base
+      - texlive-texmf
+      - print/tex-formats
+  when: ansible_distribution == "FreeBSD"
