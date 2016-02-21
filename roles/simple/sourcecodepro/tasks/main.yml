@@ -1,0 +1,6 @@
+- name: Install Adobe Source Code Pro (On FreeBSD)
+  become: yes
+  pkgng:
+      name: sourcecodepro-ttf
+      state: present
+  when: ansible_distribution == "FreeBSD"
