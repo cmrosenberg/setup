@@ -27,3 +27,10 @@
       - Inconsolata-Regular.ttf
       - Inconsolata-Bold.ttf
   when: ansible_distribution == "MacOSX"
+
+- name: Download Inconsolata programming font (on FreeBSD)
+  become: yes
+  pkgng:
+      name: inconsolata-ttf
+      state: present
+  when: ansible_distribution == "FreeBSD"
