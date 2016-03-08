@@ -1,0 +1,4 @@
+- name: Install Oracle JDK
+  homebrew_cask:
+      state: present
+      name: java
