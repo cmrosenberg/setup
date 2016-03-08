@@ -1,0 +1,5 @@
+- name: Install pip python module manager
+  homebrew:
+       name: python
+       state: present
+  when: ansible_distribution == "MacOSX"
