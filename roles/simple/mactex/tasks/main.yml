@@ -1,12 +1,6 @@
-- name: Check if MacTeX is already installed
-  stat:
-      path: /opt/homebrew-cask/Caskroom/mactex/
-  register: s
-  when: ansible_distribution == "MacOSX"
-
 
 - name: Install MacTeX framework
-  homebrew:
-      name: Caskroom/cask/mactex
+  homebrew_cask:
+      name: mactex
       state: present
-  when: ansible_distribution == "MacOSX" and not s.stat.isdir
+  when: ansible_distribution == "MacOSX"
