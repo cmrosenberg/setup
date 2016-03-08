@@ -1,0 +1,3 @@
+- name: Install the cheat pip module
+  pip:
+       name: cheat
