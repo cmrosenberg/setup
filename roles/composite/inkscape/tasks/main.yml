@@ -1,0 +1,5 @@
+- name: Install Inkscape
+  homebrew_cask:
+      name: inkscape
+      state: present
+  when: ansible_distribution == "MacOSX"
