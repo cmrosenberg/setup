@@ -1,0 +1,5 @@
+- name: Install ag (grep-like code search tool)
+  homebrew:
+      name: ag
+      state: present
+  when: ansible_distribution== "MacOSX"
