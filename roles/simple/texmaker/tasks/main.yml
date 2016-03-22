@@ -1,0 +1,5 @@
+- name: Install Texmaker LaTeX Suite
+  homebrew_cask:
+      name: texmaker
+      state: present
+  when: ansible_distribution == "MacOSX"
