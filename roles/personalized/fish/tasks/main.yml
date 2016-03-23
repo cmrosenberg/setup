@@ -1,0 +1,26 @@
+- name: Ensure that the desired git repository folder exists
+  file:
+      state: directory
+      path: "{{ git_repo_folder }}"
+
+- name: Check if personal fish configuration repository exists locally
+  stat:
+      path: "{{ git_repo_folder }}/config.fish"
+  register: st
+
+- name: Acquire personal fish configuration
+  git:
+      repo: https://github.com/cmrosenberg/config.fish.git
+      dest: "{{ git_repo_folder }}/config.fish"
+  when: st.stat.isdir is not defined
+
+- name: Ensure that ~/.config/fish exists
+  file:
+      state: directory
+      path: ~/.config/fish
+
+- name: Link core configuration to ~/.config/fish/config.fish
+  file:
+      state: link
+      src: "{{ git_repo_folder }}/config.fish/config.fish"
+      dest: ~/.config/fish/config.fish
