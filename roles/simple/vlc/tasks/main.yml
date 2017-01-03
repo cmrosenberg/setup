@@ -1,0 +1,5 @@
+- name: Install VLC Media Player
+  homebrew_cask:
+      name: vlc
+      state: present
+  when: ansible_distribution == "MacOSX"

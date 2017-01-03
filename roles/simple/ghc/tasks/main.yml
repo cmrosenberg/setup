@@ -1,0 +1,5 @@
+- name: Install the Glorious Haskell Compiler
+  homebrew:
+      name: ghc
+      state: present
+  when: ansible_distribution == "MacOSX"

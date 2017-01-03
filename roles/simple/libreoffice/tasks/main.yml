@@ -1,0 +1,4 @@
+- name: Install LibreOffice Office Suite
+  homebrew_cask:
+      name: libreoffice
+      state: present

@@ -1,0 +1,5 @@
+- name: Install Vagrant
+  homebrew_cask:
+      name: vagrant
+      state: present
+  when: ansible_distribution == "MacOSX"
